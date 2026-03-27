@@ -1,7 +1,12 @@
-import React from 'react'
+import ProductGrid from "@/components/shop/ProductGrid";
 
-export default function Shop() {
+
+export default function ShopPage() {
   return (
-    <div>This is shop page</div>
-  )
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Shop</h1>
+      <ProductGrid />
+    </div>
+  );
 }
+

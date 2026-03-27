@@ -12,13 +12,23 @@ import {
   LayoutDashboard, 
   LogOut 
 } from 'lucide-react';
+import Image from 'next/image';
+import { useCart } from '@/app/provider/CartProvider';
+import { useAuth } from '@/app/provider/AuthProvider';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); 
   const [accountOpen, setAccountOpen] = useState(false); 
   
+  const { cart } = useCart();
+  const cartCount = cart.reduce(
+  (total, item) => total + item.quantity,
+  0
+ );
 
-  const user:any = null; 
+
+
+  const { user, logout } = useAuth();
 
   const navLinks = [
     { name: 'Offers', href: '/offers' },
@@ -37,7 +47,7 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tighter text-black">
-          <img src="drugs.png" alt="Logo" className="w-10" />
+          <Image src="/drugs.png" alt="Logo" width="40" height="40" />
           <p>MEDISTORE</p>
         </Link>
 
@@ -77,7 +87,7 @@ export default function Header() {
 
                 <div className="fixed inset-0 z-10" onClick={() => setAccountOpen(false)}></div>
                 <div className="absolute right-0 mt-2 w-48 rounded-md border bg-white py-1 shadow-lg z-20">
-                  {!user ? (
+                  {/* {!user ? (
                     <>
                       <Link href="/login" onClick={() => setAccountOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</Link>
                       <Link href="/register" onClick={() => setAccountOpen(false)} className="block px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100 font-bold">Register</Link>
@@ -94,7 +104,28 @@ export default function Header() {
                         <LogOut size={16}/> Logout
                       </button>
                     </>
+                  )} */}
+
+                  {!user ? (
+                    <>
+                      <Link href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</Link>
+                      <Link href="/register" className="block px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100 font-bold">Register</Link>
+                    </>
+                  ) : (
+                    <>
+                      <div className="px-4 py-2 text-xs text-gray-500 border-b">
+                        Signed in as <span className="font-bold">{user.role}</span>
+                      </div>
+                      <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">Profile</Link>
+                      <button
+                        onClick={logout}
+                        className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                      >
+                        <LogOut /> Logout
+                      </button>
+                    </>
                   )}
+
                 </div>
               </>
             )}
@@ -104,9 +135,12 @@ export default function Header() {
           {/* Cart Icon */}
           <Link href="/cart" className="relative p-2 hover:bg-gray-100 rounded-full">
             <ShoppingCart className="h-5 w-5" />
-            <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
-              0
-            </span>
+            {cartCount > 0 && (
+              <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+                {cartCount}
+              </span>
+            )}
+
           </Link>
           
           {/* Mobile Menu Button */}
@@ -120,7 +154,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* --- Mobile Menu --- */}
+      {/* Mobile Menu*/}
 
       <div 
         className={`fixed inset-0 bg-black/40 z-60 transition-opacity md:hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
