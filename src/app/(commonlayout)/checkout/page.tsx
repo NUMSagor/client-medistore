@@ -6,6 +6,7 @@ import { useAuth } from '@/app/provider/AuthProvider';
 import { useCart } from '@/app/provider/CartProvider';
 import api from '@/lib/api';
 
+
 export default function CheckoutPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
@@ -76,15 +77,18 @@ export default function CheckoutPage() {
 
     
       const payload = {
-        customerId: user.id, 
+        // customerId: user.id || (user as any).userId, 
         items: cart.map(item => ({
           medicineId: item.id, 
-          quantity: item.quantity
+          quantity: item.quantity,
+          price: item.price
         })),
         shippingAddress: shippingAddressStr 
       };
 
       console.log('Placing order payload:', payload);
+
+      console.log("TOKEN:", localStorage.getItem("token"));
 
      
       const res = await api.post('/orders', payload);

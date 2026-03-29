@@ -31,6 +31,7 @@ export default function Header() {
   const { user, logout } = useAuth();
 
   const navLinks = [
+    { name: 'Home', href: '/' },
     { name: 'Offers', href: '/offers' },
     { name: 'Shop', href: '/shop' },
     { name: 'Contact', href: '/contact' },

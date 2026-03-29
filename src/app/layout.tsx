@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import {Providers} from "./provider";
+import { Providers } from "./provider";
 import { CartProvider } from "./provider/CartProvider";
 import { AuthProvider } from "./provider/AuthProvider";
 
@@ -24,15 +24,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning> 
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider>
-        <CartProvider>
-          <Header />
-          {children}
-        </CartProvider>
+          <CartProvider>
+            <Header />
+            {children}
+          </CartProvider>
         </AuthProvider>
-        
+
       </body>
     </html>
   );

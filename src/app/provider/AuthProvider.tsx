@@ -1,7 +1,8 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
 import api from '@/lib/api';
+import { createContext, useContext, useEffect, useState } from 'react';
+
 
 export type User = {
   id: string;
