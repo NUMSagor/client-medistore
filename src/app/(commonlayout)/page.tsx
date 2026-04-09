@@ -1,216 +1,6 @@
-// 'use client';
-
-// import Link from 'next/link';
-// import { useState } from 'react';
-// import { ChevronRight, ArrowRight, ShieldCheck, Truck, Clock } from 'lucide-react';
-
-// // ─── Types ────────────────────────────────────────────────────────────────────
-// interface Category {
-//   id: number;
-//   name: string;
-//   href: string;
-// }
-
-// // ─── Data (replace with API fetch later) ──────────────────────────────────────
-// const categories: Category[] = [
-//   { id: 1,  name: 'Antibiotics',        href: '/shop?category=antibiotics' },
-//   { id: 2,  name: 'Pain Relief',        href: '/shop?category=pain-relief' },
-//   { id: 3,  name: 'Vitamins & Supplements', href: '/shop?category=vitamins' },
-//   { id: 4,  name: 'Diabetes Care',      href: '/shop?category=diabetes' },
-//   { id: 5,  name: 'Heart & Blood Pressure', href: '/shop?category=cardiology' },
-//   { id: 6,  name: 'Skin Care',          href: '/shop?category=skincare' },
-//   { id: 7,  name: 'Baby & Mother Care', href: '/shop?category=baby' },
-//   { id: 8,  name: 'Eye & Ear Care',     href: '/shop?category=eye-ear' },
-//   { id: 9,  name: 'Digestive Health',   href: '/shop?category=digestive' },
-//   { id: 10, name: 'Mental Wellness',    href: '/shop?category=mental-wellness' },
-//   { id: 11, name: 'Medical Devices',    href: '/shop?category=devices' },
-//   { id: 12, name: 'First Aid',          href: '/shop?category=first-aid' },
-// ];
-
-// const slides = [
-//   {
-//     id: 1,
-//     tag: 'Flash Sale — Today Only',
-//     title: 'Up to 40% off\nVitamins & Supplements',
-//     subtitle: 'Boost your immunity with our curated wellness range. Genuine brands, fast delivery.',
-//     cta: 'Shop Now',
-//     href: '/shop?category=vitamins',
-//     bg: 'from-indigo-600 to-pink-700',
-//     accent: 'bg-white/20',
-//   },
-//   {
-//     id: 2,
-//     tag: 'New Arrivals',
-//     title: 'Advanced Diabetes\nCare Range',
-//     subtitle: 'Glucometers, test strips, insulin pens and more — all in one place.',
-//     cta: 'Explore Range',
-//     href: '/shop?category=diabetes',
-//     bg: 'from-pink-600 to-indigo-700',
-//     accent: 'bg-white/20',
-//   },
-//   {
-//     id: 3,
-//     tag: 'Free Delivery',
-//     title: 'Order over $50\nShip for Free',
-//     subtitle: 'Fast, discreet doorstep delivery. Licensed pharmacy, 100% genuine products.',
-//     cta: 'Start Shopping',
-//     href: '/shop',
-//     bg: 'from-indigo-700 to-violet-700',
-//     accent: 'bg-white/20',
-//   },
-// ];
-
-// const trustItems = [
-//   { icon: ShieldCheck, label: '100% Genuine', sub: 'Licensed & verified products' },
-//   { icon: Truck,       label: 'Fast Delivery', sub: 'Orders ship within 24h' },
-//   { icon: Clock,       label: '24/7 Support',  sub: 'We\'re always here for you' },
-// ];
-
-// // ─── Component ────────────────────────────────────────────────────────────────
-// export default function HomePage() {
-//   const [activeSlide, setActiveSlide] = useState(0);
-//   const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
-//   const slide = slides[activeSlide];
-
-//   return (
-//     <main className="min-h-screen bg-gray-50">
-
-//       {/* ── Hero + Sidebar ──────────────────────────────────────────────────── */}
-//       <section className="container max-w-7xl mx-auto px-4 py-6">
-//         <div className="flex gap-4 items-stretch">
-
-//           {/* ── Category Sidebar ─────────────────────────────────────────── */}
-//           <aside className="hidden md:flex flex-col w-56 shrink-0 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-//             <div className="px-4 py-3 border-b bg-linear-to-r from-indigo-600 to-pink-700">
-//               <p className="text-xs font-bold text-white tracking-widest uppercase">Categories</p>
-//             </div>
-//             <ul className="flex-1 divide-y divide-gray-100">
-//               {categories.map((cat) => (
-//                 <li key={cat.id}>
-//                   <Link
-//                     href={cat.href}
-//                     onMouseEnter={() => setHoveredCategory(cat.id)}
-//                     onMouseLeave={() => setHoveredCategory(null)}
-//                     className={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors duration-150
-//                       ${hoveredCategory === cat.id
-//                         ? 'bg-indigo-50 text-indigo-700 font-medium'
-//                         : 'text-gray-700 hover:bg-gray-50'
-//                       }`}
-//                   >
-//                     <span>{cat.name}</span>
-//                     <ChevronRight
-//                       className={`h-3.5 w-3.5 transition-transform duration-150
-//                         ${hoveredCategory === cat.id ? 'translate-x-0.5 text-indigo-500' : 'text-gray-300'}`}
-//                     />
-//                   </Link>
-//                 </li>
-//               ))}
-//             </ul>
-//             <div className="px-4 py-3 border-t">
-//               <Link
-//                 href="/shop"
-//                 className="flex items-center justify-center gap-1 w-full text-xs font-semibold text-indigo-600 hover:text-pink-600 transition-colors"
-//               >
-//                 View all products <ArrowRight className="h-3 w-3" />
-//               </Link>
-//             </div>
-//           </aside>
-
-//           {/* ── Hero Banner ──────────────────────────────────────────────── */}
-//           <div className="flex-1 flex flex-col gap-4">
-
-//             {/* Main slide */}
-//             <div className={`relative overflow-hidden rounded-xl bg-linear-to-br ${slide.bg} text-white min-h-80 flex items-center px-10 py-10`}>
-//               {/* Decorative circles */}
-//               <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
-//               <div className="absolute -bottom-10 right-24 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
-
-//               <div className="relative z-10 max-w-lg">
-//                 {/* Tag */}
-//                 <span className="inline-block mb-3 px-3 py-1 text-xs font-semibold rounded-full bg-white/20 border border-white/30 tracking-wide">
-//                   {slide.tag}
-//                 </span>
-
-//                 {/* Title */}
-//                 <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-3 whitespace-pre-line tracking-tight">
-//                   {slide.title}
-//                 </h1>
-
-//                 {/* Subtitle */}
-//                 <p className="text-sm text-white/80 leading-relaxed mb-6 max-w-sm">
-//                   {slide.subtitle}
-//                 </p>
-
-//                 {/* CTA */}
-//                 <Link
-//                   href={slide.href}
-//                   className="inline-flex items-center gap-2 bg-white text-indigo-700 font-bold text-sm px-6 py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
-//                 >
-//                   {slide.cta}
-//                   <ArrowRight className="h-4 w-4" />
-//                 </Link>
-//               </div>
-
-//               {/* Slide dots */}
-//               <div className="absolute bottom-5 right-6 flex gap-2">
-//                 {slides.map((_, i) => (
-//                   <button
-//                     key={i}
-//                     onClick={() => setActiveSlide(i)}
-//                     className={`rounded-full transition-all duration-300 ${
-//                       i === activeSlide ? 'w-6 h-2 bg-white' : 'w-2 h-2 bg-white/40 hover:bg-white/70'
-//                     }`}
-//                   />
-//                 ))}
-//               </div>
-//             </div>
-
-//             {/* Trust badges row */}
-//             <div className="grid grid-cols-3 gap-4">
-//               {trustItems.map(({ icon: Icon, label, sub }) => (
-//                 <div
-//                   key={label}
-//                   className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm"
-//                 >
-//                   <div className="shrink-0 w-9 h-9 rounded-full bg-indigo-50 flex items-center justify-center">
-//                     <Icon className="h-4 w-4 text-indigo-600" />
-//                   </div>
-//                   <div>
-//                     <p className="text-sm font-semibold text-gray-800">{label}</p>
-//                     <p className="text-xs text-gray-500">{sub}</p>
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* ── Mobile Categories (horizontal scroll) ───────────────────────────── */}
-//       <section className="md:hidden px-4 pb-4">
-//         <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Categories</p>
-//         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-//           {categories.map((cat) => (
-//             <Link
-//               key={cat.id}
-//               href={cat.href}
-//               className="shrink-0 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-indigo-400 hover:text-indigo-600 transition-colors"
-//             >
-//               {cat.name}
-//             </Link>
-//           ))}
-//         </div>
-//       </section>
-
-//     </main>
-//   );
-// }
-
-
-
 'use client';
-import "@/app/globals.css";   
+
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import {
@@ -222,13 +12,11 @@ import api from '@/lib/api';
 import { useCart } from '@/app/provider/CartProvider';
 import { Product } from '@/types/products';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface Category {
   id: string;
   name: string;
 }
 
-// ─── Static Data ──────────────────────────────────────────────────────────────
 const slides = [
   {
     id: 1,
@@ -322,7 +110,6 @@ const footerLinks = [
   },
 ];
 
-// ─── Product Card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const discount = product.discountPercent ?? 0;
@@ -374,7 +161,6 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-// ─── Skeleton ─────────────────────────────────────────────────────────────────
 function ProductSkeleton() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -392,8 +178,7 @@ function ProductSkeleton() {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-export default function HomePage() {
+function HomeContent() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -420,12 +205,8 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
-      {/* ── Hero + Sidebar ──────────────────────────────────────────────────── */}
       <section className="container max-w-7xl mx-auto px-4 py-6">
         <div className="flex gap-4 items-stretch">
-
-          {/* Category Sidebar */}
           <aside className="hidden md:flex flex-col w-56 shrink-0 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
             <div className="px-4 py-3 border-b bg-gradient-to-r from-indigo-600 to-pink-700">
               <p className="text-xs font-bold text-white tracking-widest uppercase">Categories</p>
@@ -458,7 +239,6 @@ export default function HomePage() {
             </div>
           </aside>
 
-          {/* Hero Banner */}
           <div className="flex-1 flex flex-col gap-4">
             <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${slide.bg} text-white min-h-[320px] flex items-center px-10 py-10`}>
               <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
@@ -480,7 +260,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Trust badges */}
             <div className="grid grid-cols-3 gap-4">
               {trustItems.map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
@@ -498,7 +277,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Mobile Categories ───────────────────────────────────────────────── */}
       <section className="md:hidden px-4 pb-4">
         <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Categories</p>
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -511,7 +289,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Featured Medicines ──────────────────────────────────────────────── */}
       <section className="container max-w-7xl mx-auto px-4 py-10">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -529,10 +306,8 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* ── Special Offers Banner + Deals ───────────────────────────────────── */}
       {!loadingProducts && deals.length > 0 && (
         <section className="container max-w-7xl mx-auto px-4 pb-10">
-          {/* Banner */}
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-700 p-8 mb-6">
             <div className="absolute -top-10 -right-10 w-56 h-56 rounded-full bg-white/10 pointer-events-none" />
             <div className="absolute bottom-0 left-1/2 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
@@ -550,14 +325,12 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          {/* Deal cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {deals.map((product) => <ProductCard key={product.id} product={product} />)}
           </div>
         </section>
       )}
 
-      {/* ── Why Choose Us ───────────────────────────────────────────────────── */}
       <section className="bg-white border-t border-gray-100 py-14">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
@@ -578,12 +351,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Footer ──────────────────────────────────────────────────────────── */}
       <footer className="bg-gray-900 text-gray-400">
         <div className="container max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-
-            {/* Brand */}
             <div className="lg:col-span-2">
               <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-white mb-4">
                 <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-sm font-black">M</span>
@@ -601,8 +371,6 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
-
-            {/* Links */}
             {footerLinks.map((col) => (
               <div key={col.title}>
                 <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">{col.title}</h4>
@@ -617,13 +385,9 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-
-        {/* Bottom bar */}
         <div className="border-t border-gray-800">
           <div className="container max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-gray-600">© {new Date().getFullYear()} MEDISTORE. All rights reserved.</p>
-
-            {/* Social */}
             <div className="flex items-center gap-3">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
                 <a key={i} href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition-colors">
@@ -631,8 +395,6 @@ export default function HomePage() {
                 </a>
               ))}
             </div>
-
-            {/* Trust */}
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1 text-xs bg-gray-800 px-3 py-1.5 rounded-full">
                 <ShieldCheck className="h-3.5 w-3.5 text-indigo-400" /> SSL Secured
@@ -644,7 +406,14 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-
     </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
