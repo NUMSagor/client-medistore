@@ -14,7 +14,7 @@ import { useState } from 'react';
 // ─── Sidebar nav per role ──────────────────────────────────────────────────
 const navItems = {
   ADMIN: [
-    { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+     { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Users', href: '/users', icon: Users },
     { label: 'Orders', href: '/orders', icon: ShoppingBag },
     { label: 'Categories', href: '/categories', icon: Tag },
@@ -25,7 +25,7 @@ const navItems = {
     { label: 'Orders', href: '/orders', icon: ClipboardList },
   ],
   CUSTOMER: [
-    { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    // { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { label: 'My Orders', href: '/orders', icon: ShoppingCart },
     { label: 'Profile', href: '/profile', icon: User },
   ],

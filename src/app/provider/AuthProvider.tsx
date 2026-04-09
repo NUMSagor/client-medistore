@@ -8,6 +8,8 @@ export type User = {
   id: string;
   name: string;  
   email: string;
+  phone?: string;
+  password: string;
   role: 'ADMIN' | 'SELLER' | 'CUSTOMER';
 };
 
@@ -31,18 +33,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // ✅ Load user from token
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setLoading(false);
-      return;
-    }
+  const token = localStorage.getItem('token');
+  if (!token) {
+    setLoading(false);
+    return;
+  }
 
-    api
-      .get('/auth/me')
-      .then((res) => setUser(res.data))
-      .catch(() => localStorage.removeItem('token'))
-      .finally(() => setLoading(false));
-  }, []);
+  api
+    .get('/auth/me')
+    .then((res) => setUser(res.data))
+    .catch(() => {
+      // localStorage.removeItem('token');
+      setUser(null);
+    })
+    .finally(() => setLoading(false));
+}, []);
 
   // ✅ LOGIN
   const login = async (data: { email: string; password: string }) => {

@@ -43,7 +43,7 @@ export default function RegisterForm() {
     const password = formData.get('password') as string;
 
     try {
-      await api.post('/register', {
+      await api.post('/auth/register', {
         name,    
         email,
         password,

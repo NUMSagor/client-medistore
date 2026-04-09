@@ -67,7 +67,7 @@ export default function SellerOrdersPage() {
                       <td className="px-6 py-3 font-mono text-xs text-gray-400">{order.id.slice(0, 8)}...</td>
                       <td className="px-6 py-3 text-gray-500">{order.items?.length ?? 0} item(s)</td>
                       <td className="px-6 py-3 font-semibold text-indigo-600">${total.toFixed(2)}</td>
-                      <td className="px-6 py-3 text-gray-500 max-w-[150px] truncate">{order.shippingAddress}</td>
+                      <td className="px-6 py-3 text-gray-500 max-w-37.5 truncate">{order.shippingAddress}</td>
                       <td className="px-6 py-3">
                         <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${statusColor[order.status] ?? 'bg-gray-100 text-gray-600'}`}>
                           {order.status}

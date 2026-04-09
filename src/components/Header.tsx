@@ -117,7 +117,7 @@ export default function Header() {
                       <div className="px-4 py-2 text-xs text-gray-500 border-b">
                         Signed in as <span className="font-bold">{user.role}</span>
                       </div>
-                      <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">Profile</Link>
+                      <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">Dashboard</Link>
                       <button
                         onClick={logout}
                         className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
