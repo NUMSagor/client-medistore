@@ -1,12 +1,13 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import LoginForm from '@/components/login-form';
 
-export default function Page() {
+function LoginContent() {
   const router = useRouter();
-  const searchParams = useSearchParams(); // hook
+  const searchParams = useSearchParams();
   const redirect = searchParams?.get('redirect') || '/';
 
   useEffect(() => {
@@ -19,5 +20,13 @@ export default function Page() {
         <LoginForm />
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
