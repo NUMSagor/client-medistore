@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = "force-dynamic";
+
 import { Suspense } from 'react';
 import ProductGrid from '@/components/shop/ProductGrid';
 import ProductFilters from '@/components/shop/ProductFilters';
@@ -15,9 +17,10 @@ export default function ShopPage() {
         </div>
 
         <div className="flex gap-6 items-start">
-          {/* Filters Sidebar */}
           <aside className="hidden md:block w-56 shrink-0">
-            <ProductFilters />
+            <Suspense fallback={<div className="h-20 bg-gray-100 animate-pulse" />}>
+              <ProductFilters />
+            </Suspense>
           </aside>
 
           {/* Product Grid */}
