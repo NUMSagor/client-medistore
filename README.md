@@ -1,36 +1,217 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💊 MediStore – Full Stack Medicine Store Web App
 
-## Getting Started
+**MediStore** is a full-stack medicine e-commerce platform where customers can browse medicines, sellers can manage inventory, and admins control the entire system.
 
-First, run the development server:
+Built with a modern production-ready stack using **Next.js, TypeScript, Express, Prisma, PostgreSQL**, and deployed on **Vercel**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🌐 Live Links
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Frontend Live
+👉 https://client-medistore.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Backend Live
+👉 https://medistore-server.vercel.app/
 
-## Learn More
+Frontend Repository
+👉 https://github.com/NUMSagor/client-medistore.git
 
-To learn more about Next.js, take a look at the following resources:
+Backend Repository
+👉 https://github.com/NUMSagor/medistore-server.git
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 👤 Demo Login Credentials
 
-## Deploy on Vercel
+### 👑 Admin Access
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Email: [smadmin@gmail.com](mailto:smadmin@gmail.com)
+Password: sagor123450
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🏪 Seller Access
+
+Email: [halim@gmail.com](mailto:halim@gmail.com)
+Password: halim123450
+
+### 🧑 Customer Access
+
+Email: [rasel@gmail.com](mailto:rasel@gmail.com)
+Password: rasel123450
+
+---
+
+# 🚀 Features
+
+## 👑 Admin Panel
+
+* Manage users
+* Manage sellers
+* Manage medicines
+* Manage categories
+* View platform statistics
+* Control order status
+
+## 🏪 Seller Dashboard
+
+* Add medicines
+* Update medicines
+* Delete medicines
+* Manage inventory
+* Track orders
+
+## 🧑 Customer Features
+
+* Browse medicines
+* Filter medicines by category
+* View medicine details
+* Add to cart
+* Checkout system
+* Order history tracking
+* Profile management
+
+## 🔐 Authentication System
+
+* Role-based authentication
+* Admin / Seller / Customer access control
+* Protected dashboard routes
+* Secure API authorization
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+| Technology           | Purpose                 |
+| -------------------- | ----------------------- |
+| Next.js (App Router) | SSR + Routing           |
+| TypeScript           | Type Safety             |
+| Tailwind CSS         | UI Styling              |
+| Context API          | Global State Management |
+
+---
+
+## Backend
+
+| Technology | Purpose               |
+| ---------- | --------------------- |
+| Node.js    | Runtime               |
+| Express.js | REST API              |
+| PostgreSQL | Database              |
+| Prisma ORM | Database Access Layer |
+| TypeScript | Type Safety           |
+
+---
+
+## Deployment
+
+| Service | Purpose                          |
+| ------- | -------------------------------- |
+| Vercel  | Frontend Hosting                 |
+| Vercel  | Backend Hosting (Serverless API) |
+
+---
+
+# 📂 Project Architecture
+
+
+
+
+
+
+
+# ⚙️ Environment Variables Setup
+
+## Frontend (.env)
+
+NEXT_PUBLIC_API_URL=your_backend_url
+
+Example:
+
+NEXT_PUBLIC_API_URL=https://medistore-server.vercel.app
+
+---
+
+## Backend (.env)
+
+DATABASE_URL=your_postgres_connection_string
+
+JWT_SECRET=your_secret_key
+
+FRONTEND_URL=https://client-medistore.vercel.app
+
+
+
+
+
+# 🧪 API Base URL
+
+https://medistore-server.vercel.app/api
+
+Example:
+
+GET /medicines
+POST /orders
+POST /auth/login
+
+---
+
+# 🔐 Role-Based Access Structure
+
+| Role     | Access              |
+| -------- | ------------------- |
+| Admin    | Full control        |
+| Seller   | Medicine management |
+| Customer | Purchase medicines  |
+
+---
+
+# 📊 Database Schema Highlights
+
+Main entities:
+
+* User
+* Medicine
+* Category
+* Order
+* OrderItem
+* Role
+
+Managed using **Prisma ORM** with PostgreSQL.
+
+---
+
+# ✨ Key Highlights of This Project
+
+✔ Full-stack production structure
+✔ Role-based authentication
+✔ Secure REST API
+✔ Prisma ORM integration
+✔ PostgreSQL relational database
+✔ Serverless backend deployment
+✔ Next.js App Router architecture
+✔ Clean modular backend architecture
+
+---
+
+# 📸 Future Improvements
+
+* Online payment integration
+* Medicine prescription upload feature
+* Email notifications
+* Admin analytics dashboard charts
+* Review & rating system
+
+---
+
+# 👨‍💻 Author
+
+Sagor
+GitHub: https://github.com/NUMSagor
+
+---
+
+# ⭐ Support
+
+If you like this project, consider giving it a **star ⭐** on GitHub.
