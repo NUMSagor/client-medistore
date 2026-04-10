@@ -241,7 +241,7 @@ function HomeContent() {
           </aside>
 
           <div className="flex-1 flex flex-col gap-4">
-            <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${slide.bg} text-white min-h-[320px] flex items-center px-10 py-10`}>
+            <div className={`relative overflow-hidden rounded-xl bg-linear-to-br ${slide.bg} text-white min-h-[320px] flex items-center px-10 py-10`}>
               <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
               <div className="absolute -bottom-10 right-24 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
               <div className="relative z-10 max-w-lg">
@@ -332,6 +332,119 @@ function HomeContent() {
         </section>
       )}
 
+
+      {/* ── Expert Support ───── */}
+      <section className="bg-white border-t border-gray-100 py-16">
+        <div className="container max-w-7xl mx-auto px-4">
+
+          {/* Header */}
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600 mb-2">Expert Support</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Talk to a specialist, anytime</h2>
+            <p className="text-sm text-gray-500">Our licensed pharmacists and health advisors are here to help you make informed decisions.</p>
+          </div>
+
+          {/* Specialist Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+            {[
+              {
+                image: 'https://randomuser.me/api/portraits/men/32.jpg',
+                name: 'Dr. Rafiq Patel',
+                role: 'Clinical Pharmacist · 12 yrs',
+                tags: ['Drug interactions', 'Dosage', 'Chronic care'],
+                gradient: 'from-indigo-600 to-violet-600',
+              },
+              {
+                image: 'https://randomuser.me/api/portraits/women/44.jpg',
+                name: 'Sara Jahan',
+                role: 'Health Advisor · 8 yrs',
+                tags: ['Vitamins', 'Supplements', 'Wellness'],
+                gradient: 'from-pink-600 to-indigo-600',
+              },
+              {
+                image: 'https://randomuser.me/api/portraits/women/68.jpg',
+                name: 'Dr. Mina Karim',
+                role: 'Diabetes Specialist · 10 yrs',
+                tags: ['Diabetes', 'Insulin', 'Diet'],
+                gradient: 'from-indigo-700 to-pink-700',
+              },
+              {
+                image: 'https://randomuser.me/api/portraits/men/75.jpg',
+                name: 'Tanvir Hossain',
+                role: 'Pediatric Advisor · 6 yrs',
+                tags: ['Child health', 'Vaccines', 'Nutrition'],
+                gradient: 'from-violet-600 to-pink-600',
+              },
+              {
+                image: 'https://randomuser.me/api/portraits/men/75.jpg',
+                name: 'Kamarul Hassan',
+                role: 'Pediatric Advisor · 6 yrs',
+                tags: ['D-Ortho', 'Sports Medecine', ''],
+                gradient: 'from-violet-600 to-pink-600',
+              },
+              {
+                image: 'https://randomuser.me/api/portraits/men/75.jpg',
+                name: 'Akhter Khan',
+                role: 'Pediatric Advisor · 6 yrs',
+                tags: ['Genetics and Reproduction'],
+                gradient: 'from-violet-600 to-pink-600',
+              },
+            ].map((s) => (
+              <div key={s.name} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
+                {/* Gradient top bar + image */}
+                <div className={`relative h-32 bg-linear-to-br ${s.gradient} flex items-end justify-center`}>
+                  <div className="absolute -bottom-8 w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-sm">
+                    <img src={s.image} alt={s.name} className="w-full h-full object-cover" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-col flex-1 pt-10 pb-5 px-4 items-center text-center">
+                  <p className="font-semibold text-gray-900 text-sm mb-0.5">{s.name}</p>
+                  <p className="text-xs text-gray-500 mb-3">{s.role}</p>
+                  <div className="flex flex-wrap gap-1.5 justify-center mb-4">
+                    {s.tags.map((tag) => (
+                      <span key={tag} className="text-[11px] px-2 py-1 rounded-full border border-gray-200 bg-gray-50 text-gray-500">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <button className="mt-auto w-full text-sm font-semibold bg-gradient-to-r from-indigo-600 to-pink-700 text-white rounded-lg py-2 hover:opacity-90 transition-opacity">
+                    Consult now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Hotline Bar */}
+          <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 to-pink-700 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/10 pointer-events-none" />
+            <div className="absolute -bottom-6 left-1/3 w-28 h-28 rounded-full bg-white/5 pointer-events-none" />
+            <div className="relative flex items-center gap-4">
+              <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                <Phone className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs text-white/70 mb-0.5">24/7 pharmacist hotline</p>
+                <p className="text-base font-semibold text-white">+1 (800) 123-4567</p>
+              </div>
+            </div>
+            <div className="relative flex gap-3">
+              <button className="text-sm font-semibold border border-white/40 text-white rounded-lg px-5 py-2 hover:bg-white/10 transition-colors">
+                Live chat
+              </button>
+              <button className="text-sm font-semibold bg-white text-indigo-700 rounded-lg px-5 py-2 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                Call now
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+
       <section className="bg-white border-t border-gray-100 py-14">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
@@ -357,7 +470,7 @@ function HomeContent() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             <div className="lg:col-span-2">
               <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-white mb-4">
-                <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-sm font-black">M</span>
+                <span className="w-8 h-8 rounded-lg bg-lonear-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-sm font-black">M</span>
                 MEDISTORE
               </Link>
               <p className="text-sm leading-relaxed mb-5 max-w-xs">

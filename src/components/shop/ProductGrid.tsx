@@ -26,6 +26,7 @@ export default function ProductGrid() {
       try {
         // endpoint backend
         const res = await api.get('/seller/medicines'); 
+        console.log(res.data);
       
         const medicines = Array.isArray(res.data) ? res.data : [];
         setProducts(medicines);
