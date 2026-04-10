@@ -1,6 +1,5 @@
 'use client';
 
-
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -111,6 +110,51 @@ const footerLinks = [
   },
 ];
 
+const specialists = [
+  {
+    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+    name: 'Dr. Rafiq Patel',
+    role: 'Clinical Pharmacist · 12 yrs',
+    tags: ['Drug interactions', 'Dosage', 'Chronic care'],
+    gradient: 'from-indigo-600 to-violet-600',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/women/44.jpg',
+    name: 'Sara Jahan',
+    role: 'Health Advisor · 8 yrs',
+    tags: ['Vitamins', 'Supplements', 'Wellness'],
+    gradient: 'from-pink-600 to-indigo-600',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/women/68.jpg',
+    name: 'Dr. Mina Karim',
+    role: 'Diabetes Specialist · 10 yrs',
+    tags: ['Diabetes', 'Insulin', 'Diet'],
+    gradient: 'from-indigo-700 to-pink-700',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/men/75.jpg',
+    name: 'Tanvir Hossain',
+    role: 'Pediatric Advisor · 6 yrs',
+    tags: ['Child health', 'Vaccines', 'Nutrition'],
+    gradient: 'from-violet-600 to-pink-600',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/men/41.jpg',
+    name: 'Kamarul Hassan',
+    role: 'Ortho Specialist · 9 yrs',
+    tags: ['D-Ortho', 'Sports Medicine'],
+    gradient: 'from-indigo-600 to-pink-700',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/men/56.jpg',
+    name: 'Akhter Khan',
+    role: 'Genetics Advisor · 7 yrs',
+    tags: ['Genetics', 'Reproduction'],
+    gradient: 'from-pink-700 to-violet-700',
+  },
+];
+
 function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const discount = product.discountPercent ?? 0;
@@ -146,7 +190,7 @@ function ProductCard({ product }: { product: Product }) {
           {discount > 0 && <span className="text-xs text-gray-400 line-through">${product.price.toFixed(2)}</span>}
         </div>
         <div className="mt-auto flex gap-2">
-          <Link href={`/shop/${product.id}`} className="flex-1 text-center text-sm font-semibold bg-gradient-to-r from-indigo-600 to-pink-700 text-white py-2 rounded-lg hover:opacity-90 transition-opacity">
+          <Link href={`/shop/${product.id}`} className="flex-1 text-center text-sm font-semibold bg-linear-to-r from-indigo-600 to-pink-700 text-white py-2 rounded-lg hover:opacity-90 transition-opacity">
             Details
           </Link>
           <button
@@ -206,10 +250,14 @@ function HomeContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+
+      {/* ── Hero + Sidebar ── */}
       <section className="container max-w-7xl mx-auto px-4 py-6">
         <div className="flex gap-4 items-stretch">
+
+          {/* Category Sidebar */}
           <aside className="hidden md:flex flex-col w-56 shrink-0 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-            <div className="px-4 py-3 border-b bg-gradient-to-r from-indigo-600 to-pink-700">
+            <div className="px-4 py-3 border-b bg-linear-to-r from-indigo-600 to-pink-700">
               <p className="text-xs font-bold text-white tracking-widest uppercase">Categories</p>
             </div>
             <ul className="flex-1 divide-y divide-gray-100 overflow-y-auto">
@@ -240,6 +288,7 @@ function HomeContent() {
             </div>
           </aside>
 
+          {/* Hero Banner */}
           <div className="flex-1 flex flex-col gap-4">
             <div className={`relative overflow-hidden rounded-xl bg-linear-to-br ${slide.bg} text-white min-h-[320px] flex items-center px-10 py-10`}>
               <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
@@ -261,6 +310,7 @@ function HomeContent() {
               </div>
             </div>
 
+            {/* Trust badges */}
             <div className="grid grid-cols-3 gap-4">
               {trustItems.map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
@@ -278,6 +328,7 @@ function HomeContent() {
         </div>
       </section>
 
+      {/* ── Mobile Categories ── */}
       <section className="md:hidden px-4 pb-4">
         <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Categories</p>
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -290,6 +341,7 @@ function HomeContent() {
         </div>
       </section>
 
+      {/* ── Featured Medicines ── */}
       <section className="container max-w-7xl mx-auto px-4 py-10">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -307,9 +359,10 @@ function HomeContent() {
         )}
       </section>
 
+      {/* ── Special Offers ── */}
       {!loadingProducts && deals.length > 0 && (
         <section className="container max-w-7xl mx-auto px-4 pb-10">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-700 p-8 mb-6">
+          <div className="relative overflow-hidden rounded-2xl bg-linear-to-r from-indigo-600 to-pink-700 p-8 mb-6">
             <div className="absolute -top-10 -right-10 w-56 h-56 rounded-full bg-white/10 pointer-events-none" />
             <div className="absolute bottom-0 left-1/2 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
             <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -332,7 +385,67 @@ function HomeContent() {
         </section>
       )}
 
+      {/* ── Expert Support ── */}
+      <section className="bg-white border-t border-gray-100 py-16">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600 mb-2">Expert Support</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Talk to a specialist, anytime</h2>
+            <p className="text-sm text-gray-500">Our licensed pharmacists and health advisors are here to help you make informed decisions.</p>
+          </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+            {specialists.map((s) => (
+              <div key={s.name} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
+                <div className={`relative h-32 bg-linear-to-br ${s.gradient} flex items-end justify-center`}>
+                  <div className="absolute -bottom-8 w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-sm">
+                    <img src={s.image} alt={s.name} className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div className="flex flex-col flex-1 pt-10 pb-5 px-4 items-center text-center">
+                  <p className="font-semibold text-gray-900 text-sm mb-0.5">{s.name}</p>
+                  <p className="text-xs text-gray-500 mb-3">{s.role}</p>
+                  <div className="flex flex-wrap gap-1.5 justify-center mb-4">
+                    {s.tags.map((tag) => (
+                      <span key={tag} className="text-[11px] px-2 py-1 rounded-full border border-gray-200 bg-gray-50 text-gray-500">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <button className="mt-auto w-full text-sm font-semibold bg-linear-to-r from-indigo-600 to-pink-700 text-white rounded-lg py-2 hover:opacity-90 transition-opacity">
+                    Consult now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Hotline Bar */}
+          <div className="relative overflow-hidden rounded-xl bg-linear-to-r from-indigo-600 to-pink-700 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/10 pointer-events-none" />
+            <div className="absolute -bottom-6 left-1/3 w-28 h-28 rounded-full bg-white/5 pointer-events-none" />
+            <div className="relative flex items-center gap-4">
+              <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                <Phone className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs text-white/70 mb-0.5">24/7 pharmacist hotline</p>
+                <p className="text-base font-semibold text-white">+1 (800) 123-4567</p>
+              </div>
+            </div>
+            <div className="relative flex gap-3">
+              <button className="text-sm font-semibold border border-white/40 text-white rounded-lg px-5 py-2 hover:bg-white/10 transition-colors">
+                Live chat
+              </button>
+              <button className="text-sm font-semibold bg-white text-indigo-700 rounded-lg px-5 py-2 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                Call now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why Choose Us ── */}
       <section className="bg-white border-t border-gray-100 py-14">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
@@ -353,12 +466,13 @@ function HomeContent() {
         </div>
       </section>
 
+      {/* ── Footer ── */}
       <footer className="bg-gray-900 text-gray-400">
         <div className="container max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             <div className="lg:col-span-2">
               <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-white mb-4">
-                <span className="w-8 h-8 rounded-lg bg-lonear-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-sm font-black">M</span>
+                <span className="w-8 h-8 rounded-lg bg-linear-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-sm font-black">M</span>
                 MEDISTORE
               </Link>
               <p className="text-sm leading-relaxed mb-5 max-w-xs">
@@ -408,6 +522,7 @@ function HomeContent() {
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
