@@ -377,22 +377,16 @@ function HomeContent() {
               },
               {
                 image: 'https://randomuser.me/api/portraits/men/75.jpg',
-                name: 'Kamarul Hassan',
+                name: 'Tanvir Hossain',
                 role: 'Pediatric Advisor · 6 yrs',
-                tags: ['D-Ortho', 'Sports Medecine', ''],
+                tags: ['Child health', 'Vaccines', 'Nutrition'],
                 gradient: 'from-violet-600 to-pink-600',
               },
-              {
-                image: 'https://randomuser.me/api/portraits/men/75.jpg',
-                name: 'Akhter Khan',
-                role: 'Pediatric Advisor · 6 yrs',
-                tags: ['Genetics and Reproduction'],
-                gradient: 'from-violet-600 to-pink-600',
-              },
+              
             ].map((s) => (
               <div key={s.name} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
                 {/* Gradient top bar + image */}
-                <div className={`relative h-32 bg-linear-to-br ${s.gradient} flex items-end justify-center`}>
+                <div className={`relative h-32 bg-gradient-to-br ${s.gradient} flex items-end justify-center`}>
                   <div className="absolute -bottom-8 w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-sm">
                     <img src={s.image} alt={s.name} className="w-full h-full object-cover" />
                   </div>
