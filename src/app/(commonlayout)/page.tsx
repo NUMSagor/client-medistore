@@ -11,6 +11,7 @@ import {
 import api from '@/lib/api';
 import { useCart } from '@/app/provider/CartProvider';
 import { Product } from '@/types/products';
+import Image from "next/image";
 
 interface Category {
   id: string;
@@ -477,7 +478,9 @@ function HomeContent() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             <div className="lg:col-span-2">
               <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-white mb-4">
-                <span className="w-8 h-8 rounded-lg bg-linear-to-br from-indigo-400 to-pink-500 flex items-center justify-center text-white text-sm font-black">M</span>
+                <span className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+                  <Image src="/drugs.png" alt="Logo" width={32} height={32} className="object-contain" />
+                </span>
                 MEDISTORE
               </Link>
               <p className="text-sm leading-relaxed mb-5 max-w-xs text-indigo-200/80">
