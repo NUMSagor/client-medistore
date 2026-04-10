@@ -290,7 +290,7 @@ function HomeContent() {
 
           {/* Hero Banner */}
           <div className="flex-1 flex flex-col gap-4">
-            <div className={`relative overflow-hidden rounded-xl bg-linear-to-br ${slide.bg} text-white min-h-[320px] flex items-center px-10 py-10`}>
+            <div className={`relative overflow-hidden rounded-xl bg-linear-to-br ${slide.bg} text-white min-h-80 flex items-center px-10 py-10`}>
               <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
               <div className="absolute -bottom-10 right-24 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
               <div className="relative z-10 max-w-lg">
@@ -314,7 +314,7 @@ function HomeContent() {
             <div className="grid grid-cols-3 gap-4">
               {trustItems.map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-50 flex items-center justify-center">
+                  <div className="shrink-0 w-9 h-9 rounded-full bg-indigo-50 flex items-center justify-center">
                     <Icon className="h-4 w-4 text-indigo-600" />
                   </div>
                   <div>
@@ -467,33 +467,41 @@ function HomeContent() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="bg-gray-900 text-gray-400">
-        <div className="container max-w-7xl mx-auto px-4 py-12">
+      <footer className="relative overflow-hidden bg-linear-to-br from-indigo-900 via-indigo-800 to-pink-900 text-indigo-200">
+        {/* Background blobs */}
+        <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-white/5 pointer-events-none" />
+        <div className="absolute top-10 right-1/3 w-48 h-48 rounded-full bg-pink-500/10 pointer-events-none" />
+        <div className="absolute -bottom-10 right-10 w-56 h-56 rounded-full bg-indigo-500/10 pointer-events-none" />
+
+        <div className="relative container max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             <div className="lg:col-span-2">
               <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-white mb-4">
-                <span className="w-8 h-8 rounded-lg bg-linear-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-sm font-black">M</span>
+                <span className="w-8 h-8 rounded-lg bg-linear-to-br from-indigo-400 to-pink-500 flex items-center justify-center text-white text-sm font-black">M</span>
                 MEDISTORE
               </Link>
-              <p className="text-sm leading-relaxed mb-5 max-w-xs">
+              <p className="text-sm leading-relaxed mb-5 max-w-xs text-indigo-200/80">
                 Your trusted online pharmacy. Licensed, genuine, and delivered with care to your doorstep.
               </p>
               <div className="flex flex-col gap-2">
                 <a href="tel:+18001234567" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
-                  <Phone className="h-4 w-4 text-indigo-400" /> +1 (800) 123-4567
+                  <Phone className="h-4 w-4 text-pink-400" /> +1 (800) 123-4567
                 </a>
                 <a href="mailto:support@medistore.com" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
-                  <Mail className="h-4 w-4 text-indigo-400" /> support@medistore.com
+                  <Mail className="h-4 w-4 text-pink-400" /> support@medistore.com
                 </a>
               </div>
             </div>
+
             {footerLinks.map((col) => (
               <div key={col.title}>
                 <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">{col.title}</h4>
                 <ul className="flex flex-col gap-2.5">
                   {col.links.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className="text-sm hover:text-white transition-colors">{link.name}</Link>
+                      <Link href={link.href} className="text-sm text-indigo-200/70 hover:text-white transition-colors">
+                        {link.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -501,21 +509,25 @@ function HomeContent() {
             ))}
           </div>
         </div>
-        <div className="border-t border-gray-800">
+
+        {/* Bottom bar */}
+        <div className="relative border-t border-white/10">
           <div className="container max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-gray-600">© {new Date().getFullYear()} MEDISTORE. All rights reserved.</p>
+            <p className="text-xs text-indigo-300/60">© {new Date().getFullYear()} MEDISTORE. All rights reserved.</p>
+
             <div className="flex items-center gap-3">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition-colors">
-                  <Icon className="h-4 w-4" />
+                <a key={i} href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-pink-600 transition-colors">
+                  <Icon className="h-4 w-4 text-white" />
                 </a>
               ))}
             </div>
+
             <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1 text-xs bg-gray-800 px-3 py-1.5 rounded-full">
-                <ShieldCheck className="h-3.5 w-3.5 text-indigo-400" /> SSL Secured
+              <span className="flex items-center gap-1 text-xs bg-white/10 px-3 py-1.5 rounded-full text-indigo-200">
+                <ShieldCheck className="h-3.5 w-3.5 text-pink-400" /> SSL Secured
               </span>
-              <span className="flex items-center gap-1 text-xs bg-gray-800 px-3 py-1.5 rounded-full">
+              <span className="flex items-center gap-1 text-xs bg-white/10 px-3 py-1.5 rounded-full text-indigo-200">
                 <Star className="h-3.5 w-3.5 text-yellow-400" /> Licensed Pharmacy
               </span>
             </div>
