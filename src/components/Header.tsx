@@ -87,7 +87,7 @@ export default function Header() {
 
 
                 <div className="fixed inset-0 z-10" onClick={() => setAccountOpen(false)}></div>
-                <div className="absolute right-0 mt-2 w-48 rounded-md border bg-white py-1 shadow-lg z-20">
+                <div className="absolute right-0 mt-2 w-48 rounded-md border bg-purple-300 py-1 shadow-lg z-20">
                   {/* {!user ? (
                     <>
                       <Link href="/login" onClick={() => setAccountOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</Link>
@@ -114,8 +114,9 @@ export default function Header() {
                     </>
                   ) : (
                     <>
-                      <div className="px-4 py-2 text-xs text-gray-500 border-b">
-                        Signed in as <span className="font-bold">{user.role}</span>
+                      <div className="px-2 py-2 text-xs text-gray-900 border-b">
+                        <p className="text-sm font-bold text-gray-900">{user.name}</p>
+                        <p>Signed in as <span className="font-medium">{user.role}</span></p>
                       </div>
                       <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">Dashboard</Link>
                       <button

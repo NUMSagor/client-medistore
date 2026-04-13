@@ -15,27 +15,27 @@ interface Order {
 }
 
 const statusColor: Record<string, string> = {
-  PLACED:     'bg-blue-100 text-blue-700',
+  PLACED: 'bg-blue-100 text-blue-700',
   PROCESSING: 'bg-yellow-100 text-yellow-700',
-  SHIPPED:    'bg-indigo-100 text-indigo-700',
-  DELIVERED:  'bg-green-100 text-green-700',
-  CANCELLED:  'bg-red-100 text-red-700',
+  SHIPPED: 'bg-indigo-100 text-indigo-700',
+  DELIVERED: 'bg-green-100 text-green-700',
+  CANCELLED: 'bg-red-100 text-red-700',
 };
 
 export default function AdminOrdersPage() {
-  const [orders, setOrders]     = useState<Order[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [filtered, setFiltered] = useState<Order[]>([]);
-  const [loading, setLoading]   = useState(true);
-  const [search, setSearch]     = useState('');
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
   useEffect(() => {
-    api.get('/admin/orders')
+    api.get('/orders/admin/all')
       .then((res) => {
         const data = Array.isArray(res.data) ? res.data : [];
         setOrders(data); setFiltered(data);
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 
@@ -64,7 +64,7 @@ export default function AdminOrdersPage() {
         <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
           className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-indigo-500 bg-white">
           <option value="">All Statuses</option>
-          {['PLACED','PROCESSING','SHIPPED','DELIVERED','CANCELLED'].map((s) => (
+          {['PLACED', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'].map((s) => (
             <option key={s} value={s}>{s}</option>
           ))}
         </select>
@@ -78,7 +78,7 @@ export default function AdminOrdersPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50 text-left">
-                  {['Order ID','Customer','Items','Total','Status','Date'].map((h) => (
+                  {['Order ID', 'Customer', 'Items', 'Total', 'Status', 'Date'].map((h) => (
                     <th key={h} className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{h}</th>
                   ))}
                 </tr>

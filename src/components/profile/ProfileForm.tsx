@@ -401,7 +401,7 @@ export default function ProfileForm() {
   };
 
   const Avatar = () => (
-    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-3xl font-bold shrink-0">
+    <div className="w-20 h-20 rounded-full bg-linear-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-3xl font-bold shrink-0">
       {user.name?.charAt(0).toUpperCase()}
     </div>
   );
@@ -460,7 +460,7 @@ export default function ProfileForm() {
 
       <div className="flex gap-3">
         <button onClick={() => setMode('edit-info')}
-          className="flex items-center gap-2 flex-1 justify-center bg-gradient-to-r from-indigo-600 to-pink-700 text-white font-semibold py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm">
+          className="flex items-center gap-2 flex-1 justify-center bg-linear-to-r from-indigo-600 to-pink-700 text-white font-semibold py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm">
           <Pencil className="h-4 w-4" /> Edit Profile
         </button>
         <button onClick={() => setMode('edit-password')}
@@ -519,7 +519,7 @@ export default function ProfileForm() {
               Cancel
             </button>
             <button onClick={handleSaveInfo} disabled={savingInfo}
-              className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-pink-700 text-white font-semibold py-2.5 rounded-lg hover:opacity-90 disabled:opacity-60 transition-opacity text-sm">
+              className="flex-1 flex items-center justify-center gap-2 bg-linear-to-r from-indigo-600 to-pink-700 text-white font-semibold py-2.5 rounded-lg hover:opacity-90 disabled:opacity-60 transition-opacity text-sm">
               {savingInfo
                 ? <span className="h-4 w-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                 : infoSuccess ? <><Check className="h-4 w-4" /> Saved!</>
@@ -563,7 +563,7 @@ export default function ProfileForm() {
               Cancel
             </button>
             <button onClick={handleChangePassword} disabled={savingPass}
-              className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-pink-700 text-white font-semibold py-2.5 rounded-lg hover:opacity-90 disabled:opacity-60 transition-opacity text-sm">
+              className="flex-1 flex items-center justify-center gap-2 bg-linear-to-r from-indigo-600 to-pink-700 text-white font-semibold py-2.5 rounded-lg hover:opacity-90 disabled:opacity-60 transition-opacity text-sm">
               {savingPass
                 ? <span className="h-4 w-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                 : passSuccess ? <><Check className="h-4 w-4" /> Updated!</>

@@ -17,17 +17,17 @@ const statusColor: Record<string, string> = {
 
 export default function SellerDashboardPage() {
   const [medicines, setMedicines] = useState<any[]>([]);
-  const [orders, setOrders]       = useState<Order[]>([]);
-  const [loading, setLoading]     = useState(true);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
       api.get('/seller/medicines'),
-      api.get('/seller/orders'),
+      api.get('/orders/seller'),
     ]).then(([medsRes, ordersRes]) => {
       setMedicines(Array.isArray(medsRes.data) ? medsRes.data : []);
       setOrders(Array.isArray(ordersRes.data) ? ordersRes.data : []);
-    }).catch(() => {}).finally(() => setLoading(false));
+    }).catch(() => { }).finally(() => setLoading(false));
   }, []);
 
   const totalRevenue = orders
@@ -37,10 +37,10 @@ export default function SellerDashboardPage() {
   const pendingOrders = orders.filter((o) => ['PLACED', 'PROCESSING'].includes(o.status)).length;
 
   const statCards = [
-    { label: 'My Medicines',    value: medicines.length,          icon: Package,       color: 'bg-indigo-50 text-indigo-600',  href: '/dashboard/medecine' },
-    { label: 'Total Orders',    value: orders.length,             icon: ClipboardList, color: 'bg-pink-50 text-pink-600',      href: '/dashboard/orders' },
-    { label: 'Pending Orders',  value: pendingOrders,             icon: Clock,         color: 'bg-yellow-50 text-yellow-600',  href: '/dashboard/orders' },
-    { label: 'Revenue',         value: `$${totalRevenue.toFixed(2)}`, icon: DollarSign, color: 'bg-emerald-50 text-emerald-600', href: '/dashboard' },
+    { label: 'My Medicines', value: medicines.length, icon: Package, color: 'bg-indigo-50 text-indigo-600', href: '/dashboard/medecine' },
+    { label: 'Total Orders', value: orders.length, icon: ClipboardList, color: 'bg-pink-50 text-pink-600', href: '/dashboard/orders' },
+    { label: 'Pending Orders', value: pendingOrders, icon: Clock, color: 'bg-yellow-50 text-yellow-600', href: '/dashboard/orders' },
+    { label: 'Revenue', value: `$${totalRevenue.toFixed(2)}`, icon: DollarSign, color: 'bg-emerald-50 text-emerald-600', href: '/dashboard' },
   ];
 
   return (

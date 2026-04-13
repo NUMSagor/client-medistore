@@ -9,6 +9,7 @@ import { ShoppingCart } from 'lucide-react';
 import api from '@/lib/api';
 import { useCart } from '@/app/provider/CartProvider';
 import { Product } from '@/types/products';
+import { useSearchParams } from 'next/navigation';
 
 
 
@@ -19,17 +20,65 @@ export default function ProductGrid() {
   const [error, setError] = useState('');
 
   const { addToCart } = useCart();
+  const searchParams = useSearchParams();
+
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+
+
+  //     setLoading(true);
+  //     try {
+  //       const params = new URLSearchParams(); 
+
+  //       const search   = searchParams.get('search');
+  //       const category = searchParams.get('category');
+  //       const minPrice = searchParams.get('minPrice');
+  //       const maxPrice = searchParams.get('maxPrice');
+  //       const sort     = searchParams.get('sort');
+
+  //       if (search)   params.set('search', search);
+  //       if (category) params.set('categoryId', category); 
+  //       if (minPrice) params.set('minPrice', minPrice);
+  //       if (maxPrice) params.set('maxPrice', maxPrice);
+  //       if (sort)     params.set('sort', sort);
+
+  //       const res = await api.get(`/seller/medicines?${params.toString()}`);
+  //       const medicines = Array.isArray(res.data) ? res.data : [];
+  //       setProducts(medicines);
+  //     } catch (err: any) {
+  //       setError(err.response?.data?.message || 'Failed to load products');
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, [URLSearchParams]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        // endpoint backend
-        const res = await api.get('/seller/medicines'); 
-        console.log(res.data);
-      
-        const medicines = Array.isArray(res.data) ? res.data : [];
-        setProducts(medicines);
+        // useSearchParams বাদ দিয়ে সরাসরি URL থেকে পড়ুন
+        const urlParams = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams();
+
+        const search = urlParams.get('search');
+        const category = urlParams.get('category');
+        const minPrice = urlParams.get('minPrice');
+        const maxPrice = urlParams.get('maxPrice');
+        const sort = urlParams.get('sort');
+
+        console.log('category:', category); // ← check করুন
+
+        if (search) params.set('search', search);
+        if (category) params.set('categoryId', category);
+        if (minPrice) params.set('minPrice', minPrice);
+        if (maxPrice) params.set('maxPrice', maxPrice);
+        if (sort) params.set('sort', sort);
+
+        const res = await api.get(`/seller/medicines?${params.toString()}`);
+        setProducts(Array.isArray(res.data) ? res.data : []);
       } catch (err: any) {
         setError(err.response?.data?.message || 'Failed to load products');
       } finally {
@@ -38,7 +87,9 @@ export default function ProductGrid() {
     };
 
     fetchProducts();
-  }, []);
+  }, [searchParams]); // ← searchParams রাখুন dependency তে
+
+
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p className="text-red-600">{error}</p>;

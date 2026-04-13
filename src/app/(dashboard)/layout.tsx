@@ -8,6 +8,7 @@ import {
   LayoutDashboard, Users, ShoppingBag, Tag,
   Package, ClipboardList, LogOut, Menu, X,
   User, ShoppingCart, Heart,
+  Package2,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -18,6 +19,7 @@ const navItems = {
     { label: 'Users', href: '/users', icon: Users },
     { label: 'Orders', href: '/orders', icon: ShoppingBag },
     { label: 'Categories', href: '/categories', icon: Tag },
+    { label: 'Medecines', href: '/medecines', icon: Package2 },
   ],
   SELLER: [
     { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },

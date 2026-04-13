@@ -21,7 +21,7 @@ export default function SellerOrdersPage() {
   const [updating, setUpdating] = useState<string | null>(null);
 
   const load = () => {
-    api.get('/seller/orders')
+    api.get('/orders/seller')
       .then((res) => setOrders(Array.isArray(res.data) ? res.data : []))
       .catch(() => {}).finally(() => setLoading(false));
   };
@@ -31,7 +31,7 @@ export default function SellerOrdersPage() {
   const updateStatus = async (id: string, status: string) => {
     setUpdating(id);
     try {
-      await api.patch(`/seller/orders/${id}`, { status });
+      await api.patch(`/orders/seller/${id}`, { status });
       load();
     } catch {} finally { setUpdating(null); }
   };
