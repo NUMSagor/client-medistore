@@ -22,7 +22,7 @@ export default function CustomerOrdersPage() {
 
   const pending    = orders.filter((o) => ['PLACED', 'PROCESSING', 'SHIPPED'].includes(o.status)).length;
   const totalSpent = orders
-    .filter((o) => o.status === 'DELIVERED')
+    // .filter((o) => o.status === 'DELIVERED')
     .reduce((s, o) => s + (o.items?.reduce((t, i) => t + i.price * i.quantity, 0) ?? 0), 0);
 
   return (

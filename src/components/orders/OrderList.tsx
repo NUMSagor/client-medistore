@@ -123,7 +123,7 @@ export default function OrderList({ orders, loading }: { orders: Order[]; loadin
             <button
               type="button"
               onClick={() => setExpandedId(isExpanded ? null : order.id)}
-              className="w-full text-left px-6 py-4 hover:bg-gray-50 transition-colors"
+              className="w-full text-left px-6 py-4 hover:bg-gray-100 transition-colors cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
@@ -133,8 +133,8 @@ export default function OrderList({ orders, loading }: { orders: Order[]; loadin
                 <div className="flex items-center gap-3">
                   <span className="font-bold text-indigo-600">${total.toFixed(2)}</span>
                   {isExpanded
-                    ? <ChevronUp className="h-4 w-4 text-gray-400" />
-                    : <ChevronDown className="h-4 w-4 text-gray-400" />
+                    ? <ChevronUp className="h-4 w-4 text-gray-700 text-md" />
+                    : <ChevronDown className="h-4 w-4 text-gray-700 text-md" />
                   }
                 </div>
               </div>

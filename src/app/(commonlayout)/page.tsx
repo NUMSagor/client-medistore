@@ -18,6 +18,23 @@ interface Category {
   name: string;
 }
 
+
+
+const testimonials = [
+  { name: 'Rasel Ahmed',    role: 'Regular Customer',  text: 'MEDISTORE has been a lifesaver! Fast delivery and genuine medicines. Highly recommended!', rating: 5, avatar: 'R' },
+  { name: 'Fatima Khan',    role: 'Verified Buyer',    text: 'Amazing service! Got my medicines delivered within hours. The pharmacist support is excellent.', rating: 5, avatar: 'F' },
+  { name: 'Tanvir Hossain', role: 'Regular Customer',  text: 'Best online pharmacy in Bangladesh. Prices are reasonable and products are 100% genuine.', rating: 5, avatar: 'T' },
+  { name: 'Nusrat Jahan',   role: 'Verified Buyer',    text: 'I love how easy it is to order medicines. The tracking system is great and delivery is super fast!', rating: 5, avatar: 'N' },
+  { name: 'Karim Uddin',    role: 'Regular Customer',  text: 'Excellent customer support. They helped me find the right medicine and delivered it quickly.', rating: 4, avatar: 'K' },
+  { name: 'Sadia Islam',    role: 'Verified Buyer',    text: 'Very trustworthy platform. I have been using MEDISTORE for 2 years and never had any issues.', rating: 5, avatar: 'S' },
+  { name: 'Mahfuz Rahman',  role: 'Regular Customer',  text: 'Great discounts on medicines! Saved a lot of money. The app is very user-friendly too.', rating: 5, avatar: 'M' },
+  { name: 'Riya Begum',     role: 'Verified Buyer',    text: 'Professional service with a personal touch. The pharmacists are very knowledgeable and helpful.', rating: 5, avatar: 'R' },
+];
+
+
+
+
+
 const slides = [
   {
     id: 1,
@@ -261,81 +278,153 @@ function HomeContent() {
     <div className="min-h-screen bg-gray-50">
 
       {/* ── Hero + Sidebar ── */}
-      <section className="container max-w-7xl mx-auto px-4 py-6">
-        <div className="flex gap-4 items-stretch">
 
-          {/* Category Sidebar */}
-          <aside className="hidden md:flex flex-col w-56 shrink-0 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-            <div className="px-4 py-3 border-b bg-linear-to-r from-indigo-600 to-pink-700">
-              <p className="text-xs font-bold text-white tracking-widest uppercase">Categories</p>
+      <section className="container max-w-7xl mx-auto px-4 py-8">
+        <div className="flex gap-5 items-stretch">
+
+          {/* ── Category Sidebar ── */}
+          <aside className="hidden md:flex flex-col w-60 shrink-0 rounded-2xl overflow-hidden shadow-xl border border-indigo-100/60"
+            style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%)' }}>
+
+            {/* Sidebar Header */}
+            <div className="relative px-5 py-4 overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%)' }}>
+              <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-white/10" />
+              <div className="absolute bottom-0 left-8 w-10 h-10 rounded-full bg-white/5" />
+              <div className="relative flex items-center gap-2.5">
+                <div className="flex flex-col gap-0.5">
+                  <div className="w-4 h-0.5 bg-white rounded-full" />
+                  <div className="w-3 h-0.5 bg-white/60 rounded-full" />
+                  <div className="w-4 h-0.5 bg-white rounded-full" />
+                </div>
+                <p className="text-xs font-black text-white tracking-[0.2em] uppercase">Categories</p>
+              </div>
             </div>
-            <ul className="flex-1 divide-y divide-gray-100 overflow-y-auto">
+
+            {/* Category List */}
+            <ul className="flex-1 overflow-y-auto py-2">
               {categories.length === 0
                 ? Array.from({ length: 8 }).map((_, i) => (
-                  <li key={i} className="px-4 py-3"><div className="h-3 bg-gray-100 rounded animate-pulse w-3/4" /></li>
+                  <li key={i} className="px-5 py-3">
+                    <div className="h-3 bg-indigo-50 rounded-full animate-pulse" style={{ width: `${55 + i * 5}%` }} />
+                  </li>
                 ))
-                : categories.map((cat) => (
+                : categories.map((cat, idx) => (
                   <li key={cat.id}>
                     <Link
                       href={`/shop?category=${cat.id}`}
                       onMouseEnter={() => setHoveredCategory(cat.id)}
                       onMouseLeave={() => setHoveredCategory(null)}
-                      className={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors duration-150
-                          ${hoveredCategory === cat.id ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-gray-700 hover:bg-gray-50'}`}
+                      className={`group flex items-center justify-between px-5 py-2.5 text-sm transition-all duration-200 ${hoveredCategory === cat.id
+                          ? 'bg-linear-to-r from-indigo-50 to-purple-50 text-indigo-700 font-semibold'
+                          : 'text-gray-100 hover:text-gray-900'
+                        }`}
                     >
-                      <span>{cat.name}</span>
-                      <ChevronRight className={`h-3.5 w-3.5 transition-transform duration-150 ${hoveredCategory === cat.id ? 'translate-x-0.5 text-indigo-500' : 'text-gray-300'}`} />
+                      <div className="flex items-center gap-2.5">
+                        <div className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${hoveredCategory === cat.id ? 'bg-indigo-500 scale-125' : 'bg-gray-300'
+                          }`} />
+                        <span>{cat.name}</span>
+                      </div>
+                      <ChevronRight className={`h-3.5 w-3.5 transition-all duration-200 ${hoveredCategory === cat.id ? 'translate-x-1 text-indigo-500' : 'text-gray-300'
+                        }`} />
                     </Link>
                   </li>
                 ))
               }
             </ul>
-            <div className="px-4 py-3 border-t">
-              <Link href="/shop" className="flex items-center justify-center gap-1 w-full text-xs font-semibold text-indigo-600 hover:text-pink-600 transition-colors">
-                View all products <ArrowRight className="h-3 w-3" />
+
+            {/* View All */}
+            <div className="px-5 py-3.5 border-t border-indigo-50">
+              <Link href="/shop"
+                className="group flex items-center justify-center gap-2 w-full text-xs font-bold text-indigo-100 hover:text-blue-400  transition-colors">
+                <span>View all products</span>
+                <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
           </aside>
 
-          {/* Hero Banner */}
-          <div className="flex-1 flex flex-col gap-4">
-            <div className={`relative overflow-hidden rounded-xl bg-linear-to-br ${slide.bg} text-white min-h-80 flex items-center px-10 py-10`}>
-              <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
-              <div className="absolute -bottom-10 right-24 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
+          {/* ── Hero + Badges ── */}
+          <div className="flex-1 flex flex-col gap-4 min-w-0">
+
+            {/* Hero Banner */}
+            <div className={`relative overflow-hidden rounded-2xl bg-linear-to-br ${slide.bg} text-white flex items-center px-10 py-12 shadow-2xl`}
+              style={{ minHeight: '320px' }}>
+
+              {/* Background shapes */}
+              <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-white/10 pointer-events-none" />
+              <div className="absolute -bottom-16 right-16 w-56 h-56 rounded-full bg-white/5 pointer-events-none" />
+              <div className="absolute top-12 right-48 w-16 h-16 rounded-full bg-white/10 pointer-events-none" />
+              <div className="absolute bottom-8 right-8 w-8 h-8 rounded-full bg-white/20 pointer-events-none" />
+
+              {/* Decorative grid */}
+              <div className="absolute inset-0 opacity-5 pointer-events-none"
+                style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+
+              {/* Content */}
               <div className="relative z-10 max-w-lg">
-                <span className="inline-block mb-3 px-3 py-1 text-xs font-semibold rounded-full bg-white/20 border border-white/30 tracking-wide">{slide.tag}</span>
-                <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-3 whitespace-pre-line tracking-tight">{slide.title}</h1>
-                <p className="text-sm text-white/80 leading-relaxed mb-6 max-w-sm">{slide.subtitle}</p>
-                <Link href={slide.href} className="inline-flex items-center gap-2 bg-white text-indigo-700 font-bold text-sm px-6 py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-                  {slide.cta} <ArrowRight className="h-4 w-4" />
+                <div className="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm">
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                  <span className="text-xs font-bold tracking-widest uppercase">{slide.tag}</span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-black leading-[1.1] mb-4 whitespace-pre-line tracking-tight">
+                  {slide.title}
+                </h1>
+                <p className="text-sm text-white/70 leading-relaxed mb-8 max-w-sm">{slide.subtitle}</p>
+                <Link href={slide.href}
+                  className="inline-flex items-center gap-2.5 bg-white font-black text-sm px-7 py-3.5 rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-200"
+                  style={{ color: '#4f46e5' }}>
+                  {slide.cta}
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-              <div className="absolute bottom-5 right-6 flex gap-2">
+
+              {/* Slide dots */}
+              <div className="absolute bottom-5 right-6 flex items-center gap-2">
                 {slides.map((_, i) => (
                   <button key={i} onClick={() => setActiveSlide(i)}
-                    className={`rounded-full transition-all duration-300 ${i === activeSlide ? 'w-6 h-2 bg-white' : 'w-2 h-2 bg-white/40 hover:bg-white/70'}`}
+                    className={`rounded-full transition-all duration-300 ${i === activeSlide ? 'w-8 h-2.5 bg-white' : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
+                      }`}
                   />
                 ))}
               </div>
             </div>
 
-            {/* Trust badges */}
+            {/* Trust Badges */}
             <div className="grid grid-cols-3 gap-4">
-              {trustItems.map(({ icon: Icon, label, sub }) => (
-                <div key={label} className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
-                  <div className="shrink-0 w-9 h-9 rounded-full bg-indigo-50 flex items-center justify-center">
-                    <Icon className="h-4 w-4 text-indigo-600" />
+              {trustItems.map(({ icon: Icon, label, sub }, idx) => {
+                const colors = [
+                  { from: '#4f46e5', to: '#7c3aed', light: '#eef2ff', border: '#c7d2fe' },
+                  { from: '#db2777', to: '#9333ea', light: '#fdf4ff', border: '#f0abfc' },
+                  { from: '#0ea5e9', to: '#6366f1', light: '#f0f9ff', border: '#bae6fd' },
+                ];
+                const c = colors[idx];
+                return (
+                  <div key={label}
+                    className="group relative rounded-2xl p-4 flex items-center gap-3.5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-default"
+                    style={{ background: '#fff', border: `1.5px solid ${c.border}`, boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    {/* bg glow */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{ background: `linear-gradient(135deg, ${c.light} 0%, #fff 100%)` }} />
+                    {/* Icon */}
+                    <div className="relative shrink-0 w-11 h-11 rounded-xl flex items-center justify-center shadow-sm"
+                      style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }}>
+                      <Icon className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="relative">
+                      <p className="text-sm font-bold text-gray-900">{label}</p>
+                      <p className="text-xs text-gray-400 mt-0.5 leading-snug">{sub}</p>
+                    </div>
+                    {/* corner accent */}
+                    <div className="absolute -bottom-3 -right-3 w-12 h-12 rounded-full opacity-10 pointer-events-none"
+                      style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }} />
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-800">{label}</p>
-                    <p className="text-xs text-gray-500">{sub}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
           </div>
         </div>
-      </section>
+      </section> 
 
       {/* ── Mobile Categories ── */}
       <section className="md:hidden px-4 pb-4">
@@ -687,6 +776,61 @@ function HomeContent() {
           </div>
         </div>
       </section>
+
+
+    
+
+
+{/* ── Testimonials ── */}
+      <section className="py-16 bg-white border-t border-gray-100 overflow-hidden">
+        <div className="container max-w-7xl mx-auto px-4 mb-10">
+          <div className="text-center">
+            <span className="inline-block px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full bg-linear-to-r from-indigo-600 to-pink-600 text-white mb-4 shadow-md">
+              Testimonials
+            </span>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">What Our Customers Say</h2>
+            <p className="text-sm text-gray-500 max-w-md mx-auto">
+              Thousands of happy customers trust MEDISTORE for their healthcare needs.
+            </p>
+          </div>
+        </div>
+
+        {/* Single scrolling row */}
+        <div className="max-w-7xl mx-auto px-4 relative overflow-hidden">
+          {/* fade edges */}
+          <div className="absolute left-4 top-0 bottom-0 w-16 bg-linear-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-4 top-0 bottom-0 w-16 bg-linear-to-l from-white to-transparent z-10 pointer-events-none" />
+
+          <div className="flex gap-5 animate-scroll-left pb-4">
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div key={i} className="shrink-0 w-80 relative bg-white rounded-2xl p-6 border-2 border-gray-100 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200 overflow-hidden group">
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-linear-to-r from-indigo-600 to-pink-600 rounded-t-2xl" />
+                <span className="absolute top-3 right-5 text-6xl font-black text-indigo-50 group-hover:text-indigo-100 transition-colors leading-none select-none">"</span>
+
+                <div className="flex items-center gap-3 mb-4 mt-2">
+                  <div className="w-11 h-11 rounded-full bg-linear-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold text-base shrink-0 shadow-md">
+                    {t.avatar}
+                  </div>
+                  <div>
+                    <p className="text-gray-900 font-bold text-sm">{t.name}</p>
+                    <p className="text-indigo-500 text-xs font-medium">{t.role}</p>
+                  </div>
+                </div>
+
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">{t.text}</p>
+
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <span key={s} className={`text-sm ${s < t.rating ? 'text-yellow-400' : 'text-gray-200'}`}>★</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
 
       {/* ── Footer ── */}
       <footer className="relative overflow-hidden bg-linear-to-br from-indigo-900 via-indigo-800 to-pink-900 text-indigo-200">

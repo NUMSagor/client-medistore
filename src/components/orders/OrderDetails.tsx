@@ -198,8 +198,9 @@ interface OrderItem {
 export interface Order {
   id: string;
   status: string;
+  price: number;
   createdAt: string;
-  shippingAddress?: string; // ✅ fixed from 'address'
+  shippingAddress?: string;
   items: OrderItem[];
 }
 
