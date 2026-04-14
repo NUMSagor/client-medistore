@@ -19,7 +19,7 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  const resolvedParams = await params; // 
+  const resolvedParams = await params;  
   const { id } = resolvedParams;
 
   return <ProductDetails id={id} />;

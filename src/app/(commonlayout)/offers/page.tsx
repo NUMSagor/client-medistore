@@ -12,7 +12,45 @@ interface Category {
   name: string;
 }
 
-// ─── Countdown Timer Hook ─────────────────────────────────────────────────────
+
+
+const upcomingSales = [
+  {
+    title: 'Eid Special Sale',
+    date: 'April 30, 2026',
+    discount: 'Up to 60% off',
+    desc: 'Celebrate Eid with massive discounts on all medicines and health products.',
+    emoji: '🌙',
+    from: '#4f46e5',
+    to: '#7c3aed',
+    days: 16,
+  },
+  {
+    title: 'Summer Wellness',
+    date: 'May 15, 2026',
+    discount: 'Up to 40% off',
+    desc: 'Beat the heat with special discounts on vitamins, supplements and skincare.',
+    emoji: '☀️',
+    from: '#db2777',
+    to: '#f97316',
+    days: 31,
+  },
+  {
+    title: 'Monsoon Health Fest',
+    date: 'June 1, 2026',
+    discount: 'Up to 50% off',
+    desc: 'Stay healthy this monsoon with discounts on immunity boosters and more.',
+    emoji: '🌧️',
+    from: '#0ea5e9',
+    to: '#6366f1',
+    days: 48,
+  },
+];
+
+
+
+
+// ─── Countdown Timer Hook ───────────────────────//
 function useCountdown(hoursFromNow: number) {
   const end = Date.now() + hoursFromNow * 60 * 60 * 1000;
   const [timeLeft, setTimeLeft] = useState({ h: '00', m: '00', s: '00' });
@@ -37,7 +75,7 @@ function useCountdown(hoursFromNow: number) {
   return timeLeft;
 }
 
-// ─── Product Card ─────────────────────────────────────────────────────────────
+// ─── Product Card ───────────────────//
 function OfferCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const discount = product.discountPercent ?? 0;
@@ -110,7 +148,7 @@ function OfferCard({ product }: { product: Product }) {
   );
 }
 
-// ─── Skeleton ─────────────────────────────────────────────────────────────────
+// ─── Skeleton ───────────//
 function SkeletonGrid() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -129,7 +167,7 @@ function SkeletonGrid() {
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
+// ─── Main Page ────────────────//
 export default function OffersPage() {
   const [allDiscounted, setAllDiscounted] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -185,13 +223,13 @@ export default function OffersPage() {
     <main className="min-h-screen bg-gray-50">
       <div className="container max-w-7xl mx-auto px-4 py-8">
 
-        {/* ── Page Header ───────────────────────────────────────────────── */}
+        {/* ── Page Header ──────────────────────// */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Offers & Deals</h1>
           <p className="text-sm text-gray-500 mt-1">Genuine medicines at discounted prices</p>
         </div>
 
-        {/* ── Flash Sale Banner ─────────────────────────────────────────── */}
+        {/* ── Flash Sale Banner ──────────────────────────// */}
         <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 to-pink-700 text-white px-8 py-6 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 pointer-events-none" />
           <div className="absolute bottom-0 left-1/3 w-32 h-32 rounded-full bg-white/5 pointer-events-none" />
@@ -260,7 +298,7 @@ export default function OffersPage() {
           </div>
         )}
 
-        {/* ── Product Grid ──────────────────────────────────────────────── */}
+        {/* ── Product Grid ──────────────────── */}
         {loading ? (
           <SkeletonGrid />
         ) : error ? (
@@ -286,6 +324,81 @@ export default function OffersPage() {
             ))}
           </div>
         )}
+
+        {/* ── Upcoming Sales ── */}
+        <div className="mt-15">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-pink-700 px-3 py-1 rounded-full">
+              
+              <h2 className="text-lg font-bold text-gray-100">Upcoming Sales</h2>
+            </div>
+            <div className="flex-1 h-px bg-gray-100" />
+            <span className="text-xs text-gray-400 font-medium">Mark your calendar 📅</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {upcomingSales.map((sale) => (
+              <div key={sale.title}
+                className="relative bg-white rounded-2xl border-2 border-gray-100 shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 group">
+
+                {/* Top accent */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl"
+                  style={{ background: `linear-gradient(to right, ${sale.from}, ${sale.to})` }} />
+
+                {/* Countdown badge */}
+                <div className="absolute top-4 right-4 text-xs font-black px-2.5 py-1 rounded-full text-white shadow-md"
+                  style={{ background: `linear-gradient(135deg, ${sale.from}, ${sale.to})` }}>
+                  {sale.days}d left
+                </div>
+
+                <div className="p-6 pt-5">
+                  {/* Emoji */}
+                  <div className="text-4xl mb-4">{sale.emoji}</div>
+
+                  {/* Title */}
+                  <h3 className="font-black text-gray-900 text-lg mb-1">{sale.title}</h3>
+
+                  {/* Date */}
+                  <p className="text-xs font-semibold mb-3"
+                    style={{ color: sale.from }}>
+                    📅 Starts {sale.date}
+                  </p>
+
+                  {/* Discount badge */}
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black text-white mb-3 shadow-sm"
+                    style={{ background: `linear-gradient(135deg, ${sale.from}, ${sale.to})` }}>
+                    <Zap className="h-3 w-3" />
+                    {sale.discount}
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 leading-relaxed">{sale.desc}</p>
+
+                  {/* Notify button */}
+                  <button
+                    className="mt-4 w-full py-2.5 rounded-xl text-sm font-bold border-2 transition-all duration-200 group-hover:text-white group-hover:border-transparent"
+                    style={{
+                      borderColor: sale.from,
+                      color: sale.from,
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background = `linear-gradient(135deg, ${sale.from}, ${sale.to})`;
+                      (e.currentTarget as HTMLButtonElement).style.color = 'white';
+                      (e.currentTarget as HTMLButtonElement).style.borderColor = 'transparent';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                      (e.currentTarget as HTMLButtonElement).style.color = sale.from;
+                      (e.currentTarget as HTMLButtonElement).style.borderColor = sale.from;
+                    }}
+                  >
+                    🔔 Notify Me
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
       </div>
     </main>
