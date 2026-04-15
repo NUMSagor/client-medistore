@@ -59,7 +59,6 @@ export default function ProductGrid() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        // useSearchParams বাদ দিয়ে সরাসরি URL থেকে পড়ুন
         const urlParams = new URLSearchParams(window.location.search);
         const params = new URLSearchParams();
 
@@ -87,7 +86,7 @@ export default function ProductGrid() {
     };
 
     fetchProducts();
-  }, [searchParams]); // ← searchParams রাখুন dependency তে
+  }, [searchParams]);
 
 
 

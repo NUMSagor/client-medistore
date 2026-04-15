@@ -133,47 +133,64 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // }, []);
 
 
-useEffect(() => {
-  const initAuth = async () => {
-    try {
-      // ১. প্রথমে Better Auth (Google/Session) চেক করুন
-      const { data: session } = await authClient.getSession();
-      
-      if (session) {
-        setUser(session.user as unknown as User);
-        setLoading(false);
-        return; // সেশন পাওয়া গেলে এখানেই শেষ
-      }
+// useEffect(() => {
+//   const initAuth = async () => {
+//     const token = localStorage.getItem('token');
+//     if (!token) {
+//       setLoading(false);
+//       return;
+//     }
 
-      // ২. যদি Better Auth সেশন না থাকে, তবে পুরনো JWT চেক করুন
+//     try {
+//       const res = await api.get('/v1/jwt-auth/me');
+//       setUser(res.data);
+//     } catch (err: any) {
+//       // ✅ If 401, token is expired/invalid — clear it silently
+//       if (err.response?.status === 401) {
+//         localStorage.removeItem('token');
+//       }
+//       setUser(null);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   initAuth();
+// }, []);
+
+
+  useEffect(() => {
+    const initAuth = async () => {
       const token = localStorage.getItem('token');
-      if (token) {
+      if (!token) { setLoading(false); return; }
+
+      try {
         const res = await api.get('/v1/jwt-auth/me');
         setUser(res.data);
+      } catch (err: any) {
+        if (err.response?.status === 401) {
+          localStorage.removeItem('token'); // ✅ auto-clear expired token
+        }
+        setUser(null);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      console.error("Auth initialization failed", err);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  initAuth();
-}, []);
+    };
+    initAuth();
+  }, []);
 
 
 
   // ✅ JWT Login (existing)
   const login = async (data: { email: string; password: string }) => {
-    const res = await api.post('/v1/auth/login', data);
+    const res = await api.post('/v1/jwt-auth/login', data);
     localStorage.setItem('token', res.data.token);
     setUser(res.data.user);
   };
 
   // ✅ JWT Register (existing)
   const register = async (data: { email: string; password: string; role: 'ADMIN' | 'SELLER' | 'CUSTOMER'; }) => {
-    await api.post('/v1/auth/register', data);
+    await api.post('/v1/jwt-auth/register', data);
   };
 
   // ✅ NEW — Google Login via Better Auth
