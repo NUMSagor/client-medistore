@@ -29,17 +29,6 @@ Backend Repository
 Email: [smadmin@gmail.com](mailto:smadmin@gmail.com)
 Password: sagor123450
 
-### 🏪 Seller Access
-
-Email: [halim@gmail.com](mailto:halim@gmail.com)
-Password: halim123450
-
-### 🧑 Customer Access
-
-Email: [rasel@gmail.com](mailto:rasel@gmail.com)
-Password: rasel123450
-
----
 
 # 🚀 Features
 
