@@ -11,6 +11,7 @@ import {
   Package2,
 } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 // ─── Sidebar nav per role ──────────────────────────────────────────────────
 const navItems = {
@@ -92,7 +93,7 @@ export default function DashboardLayout({
         {/* Logo */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <Link href="/" className="flex items-center gap-2 font-bold text-gray-900">
-            <span className="w-7 h-7 rounded-lg bg-linear-to-br from-indigo-500 to-pink-600 flex items-center justify-center text-white text-xs font-black">M</span>
+            <Image src="/drugs.png" alt="Logo" width={24} height={24} />
             MEDISTORE
           </Link>
           <button className="md:hidden p-1" onClick={() => setSidebarOpen(false)}>
